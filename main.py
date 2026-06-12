@@ -1,9 +1,6 @@
-import tkinter as tk
+from core.janela import app
+from telas.tela_inicial import tela_inicial
 
-from db.conexao import conectar
-from ui.menu import *
-from ui.terminal import *
-from ui.janela import *
+app.show_screen(tela_inicial)
 
-janela.after(100, desenhar_menu(janela, menu_area))
-janela.mainloop()
+app.run()
