@@ -1,7 +1,7 @@
-from core.menu import menu
+from core.menu import Menu
 
 
-class Menu_principal(menu):
+class Menu_principal(Menu):
 
     def __init__(self, master, app):
 

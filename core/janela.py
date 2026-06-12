@@ -1,7 +1,7 @@
 import tkinter as tk
 
 
-class janela:
+class Janela:
 
     def __init__(self):
 
@@ -29,4 +29,4 @@ class janela:
     def run(self):
         self.root.mainloop()
 
-app = janela()
+app = Janela()

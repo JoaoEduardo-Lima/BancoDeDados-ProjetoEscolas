@@ -1,7 +1,11 @@
 import tkinter as tk
 
+from UI.estilo import MenuItemStyle
+from UI.tema import Theme
+from UI.animacao import MenuAnimations
 
-class menu(tk.Frame):
+
+class Menu(tk.Frame):
 
     def __init__(
         self,
@@ -11,7 +15,10 @@ class menu(tk.Frame):
         options
     ):
 
-        super().__init__(master, bg="black")
+        super().__init__(
+            master,
+            bg=Theme.WINDOW_BG
+        )
 
         self.app = app
         self.title = title
@@ -29,9 +36,12 @@ class menu(tk.Frame):
         self.title_label = tk.Label(
             self,
             text=self.title,
-            fg="lime",
-            bg="black",
-            font=("Consolas", 20)
+            fg=Theme.TITLE_FG,
+            bg=Theme.WINDOW_BG,
+            font=(
+                Theme.FONT_FAMILY,
+                Theme.TITLE_SIZE
+            )
         )
 
         self.title_label.pack(pady=20)
@@ -43,38 +53,84 @@ class menu(tk.Frame):
             label = tk.Label(
                 self,
                 text="",
-                fg="white",
-                bg="black",
                 anchor="w",
-                font=("Consolas", 16)
+                font=(
+                    Theme.FONT_FAMILY,
+                    Theme.OPTION_SIZE
+                )
             )
 
-            label.pack(fill="x", padx=40)
+            label.pack(
+                fill="x",
+                padx=40
+            )
 
             self.option_labels.append(label)
 
         self.refresh()
 
-    def refresh(self):
+    def apply_style(
+        self,
+        label,
+        style
+    ):
 
-        for i, label in enumerate(self.option_labels):
+        label.config(**style)
 
-            prefix = ">" if i == self.selected else " "
+    def render_option(self, index):
 
-            label.config(
-                text=f"{prefix} {self.options[i][0]}"
+        label = self.option_labels[index]
+
+        if index == self.selected:
+
+            self.apply_style(
+                label,
+                MenuItemStyle.SELECTED
             )
 
+            label.config(
+                text=f"> {self.options[index][0]}"
+            )
+
+        else:
+
+            self.apply_style(
+                label,
+                MenuItemStyle.NORMAL
+            )
+
+            label.config(
+                text=f"  {self.options[index][0]}"
+            )
+
+    def refresh(self):
+
+        for i in range(len(self.options)):
+            self.render_option(i)
+
     def up(self, event):
-        self.selected = (self.selected - 1) % len(self.options)
+
+        self.selected = (
+            self.selected - 1
+        ) % len(self.options)
+
         self.refresh()
 
     def down(self, event):
-        self.selected = (self.selected + 1) % len(self.options)
+
+        self.selected = (
+            self.selected + 1
+        ) % len(self.options)
+
         self.refresh()
 
     def enter(self, event):
 
+        MenuAnimations.on_select(
+            self.option_labels[self.selected]
+        )
+
         callback = self.options[self.selected][1]
 
         callback()
+

@@ -1,8 +1,8 @@
-from core.menu import menu
+from core.menu import Menu
 from telas.menu_principal import Menu_principal
 from core.janela import app
 
-class tela_inicial(menu):
+class Tela_inicial(Menu):
 
     def __init__(self, master, app):
 
