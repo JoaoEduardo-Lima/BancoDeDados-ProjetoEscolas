@@ -30,3 +30,24 @@ class LightTheme:
     FONT_FAMILY = "Consolas"
     TITLE_SIZE = 20
     OPTION_SIZE = 16
+
+class PastelTheme:
+
+    # Fundo principal
+    WINDOW_BG = "#F7F3ED"
+
+    # Título
+    TITLE_FG = "#7D6B91"
+
+    # Opções normais
+    NORMAL_BG = "#F7F3ED"
+    NORMAL_FG = "#5C5470"
+
+    # Opção selecionada
+    SELECTED_BG = "#D6CDEA"
+    SELECTED_FG = "#3F3552"
+
+    # Fonte
+    FONT_FAMILY = "Consolas"
+    TITLE_SIZE = 20
+    OPTION_SIZE = 16

@@ -14,6 +14,8 @@ class Tela_Cores(Menu):
 
             ("Modo Claro", self.light),
 
+            ("Modo Pastel", self.pastel),
+
             ("Voltar", self.voltar)
         ]
 
@@ -35,6 +37,12 @@ class Tela_Cores(Menu):
         GerenciadorTema.current = LightTheme
 
         self.recarregar()
+
+    def pastel(self):
+
+        GerenciadorTema.current = PastelTheme
+
+        self.recarregar()        
 
     def recarregar(self):
 
