@@ -81,7 +81,7 @@ class Janela:
         self,
         largura,
         altura
-    ):
+        ):
 
         self.root.geometry(
             f"{largura}x{altura}"
@@ -89,7 +89,21 @@ class Janela:
 
         self.center_window()
 
+    def refresh_screen(self):
 
+        current_class = self.current_screen.__class__
+
+        self.current_screen.destroy()
+
+        self.current_screen = current_class(
+            self.root,
+            self
+        )
+
+        self.current_screen.pack(
+            fill="both",
+            expand=True
+        )
 
     def run(self):
         self.root.mainloop()

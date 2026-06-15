@@ -1,7 +1,7 @@
 import tkinter as tk
 
 from UI.estilo import MenuItemStyle
-from UI.tema import Theme
+from UI.gerenciador_tema import GerenciadorTema
 from UI.animacao import MenuAnimations
 
 
@@ -17,7 +17,7 @@ class Menu(tk.Frame):
 
         super().__init__(
             master,
-            bg=Theme.WINDOW_BG
+            bg=GerenciadorTema.current.WINDOW_BG       
         )
 
         self.app = app
@@ -36,11 +36,11 @@ class Menu(tk.Frame):
         self.title_label = tk.Label(
             self,
             text=self.title,
-            fg=Theme.TITLE_FG,
-            bg=Theme.WINDOW_BG,
+            fg=GerenciadorTema.current.TITLE_FG,
+            bg=GerenciadorTema.current.WINDOW_BG,
             font=(
-                Theme.FONT_FAMILY,
-                Theme.TITLE_SIZE
+                GerenciadorTema.current.FONT_FAMILY,
+                GerenciadorTema.current.TITLE_SIZE
             )
         )
 
@@ -55,8 +55,8 @@ class Menu(tk.Frame):
                 text="",
                 anchor="w",
                 font=(
-                    Theme.FONT_FAMILY,
-                    Theme.OPTION_SIZE
+                    GerenciadorTema.current.FONT_FAMILY,
+                    GerenciadorTema.current.OPTION_SIZE
                 )
             )
 
@@ -85,7 +85,7 @@ class Menu(tk.Frame):
 
             self.apply_style(
                 label,
-                MenuItemStyle.SELECTED
+                MenuItemStyle.selected()
             )
 
             label.config(
@@ -96,7 +96,7 @@ class Menu(tk.Frame):
 
             self.apply_style(
                 label,
-                MenuItemStyle.NORMAL
+                MenuItemStyle.normal()
             )
 
             label.config(
