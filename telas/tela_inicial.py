@@ -1,6 +1,7 @@
 from core.menu import Menu
 from telas.menu_principal import Menu_principal
 from core.janela import app
+from telas.tela_configuracao import Tela_Configuracao
 
 class Tela_inicial(Menu):
 
@@ -23,4 +24,4 @@ class Tela_inicial(Menu):
         app.show_screen(Menu_principal)
 
     def configuracao(self):
-        print("abrir configurações")
+        app.show_screen(Tela_Configuracao)
