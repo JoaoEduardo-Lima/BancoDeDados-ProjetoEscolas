@@ -6,9 +6,11 @@ class Menu_principal(Menu):
     def __init__(self, master, app):
 
         options = [
-            ("Clientes", self.clientes),
-            ("Produtos", self.produtos),
-            ("Sair", app.root.quit)
+            ("Terminal", self.terminal),
+            ("Checar dados das tabelas", self.analise),
+            ("Adicionar a tabelas", self.adicionar),
+            ("Remover de tabelas", self.remover),
+            ("Voltar", self.voltar)
         ]
 
         super().__init__(
@@ -18,8 +20,17 @@ class Menu_principal(Menu):
             options
         )
 
-    def clientes(self):
-        print("Abrir clientes")
+    def terminal(self):
+        print("Abrir terminal")
 
-    def produtos(self):
-        print("Abrir produtos")
+    def analise(self):
+        print("abrir meni de analise")
+
+    def adicionar(self):
+        print("Abrir  menu de adicionar")
+    
+    def remover(self):
+        print("abrir menu de remove")
+
+    def voltar(self):
+        self.app.go_back()

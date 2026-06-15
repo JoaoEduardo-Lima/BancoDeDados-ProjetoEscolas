@@ -1,5 +1,6 @@
 from core.menu import Menu
 from core.janela import app
+from telas.tela_resolucao import Tela_Resolucao
 
 class Tela_Configuracao(Menu):
 
@@ -19,7 +20,7 @@ class Tela_Configuracao(Menu):
         )
     
     def resolucao(self):
-        print("abrir menu de resoluções")
+        app.show_screen(Tela_Resolucao)
 
     def cores(self):
         print("abrir menu de cores")

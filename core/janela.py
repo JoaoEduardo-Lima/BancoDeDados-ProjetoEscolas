@@ -8,14 +8,16 @@ class Janela:
         self.root = tk.Tk()
 
         self.root.title("Sistema")
+
         self.root.geometry("800x600")
 
         self.root.configure(bg="black")
 
         self.current_screen = None
 
-        # Histórico de telas
         self.history = []
+
+        self.center_window()
 
     def show_screen(self, screen_class):
 
@@ -57,6 +59,37 @@ class Janela:
             fill="both",
             expand=True
         )
+
+    def center_window(self):
+
+        self.root.update_idletasks()
+
+        largura = self.root.winfo_width()
+        altura = self.root.winfo_height()
+
+        largura_tela = self.root.winfo_screenwidth()
+        altura_tela = self.root.winfo_screenheight()
+
+        x = (largura_tela // 2) - (largura // 2)
+        y = (altura_tela // 2) - (altura // 2)
+
+        self.root.geometry(
+            f"{largura}x{altura}+{x}+{y}"
+        )
+
+    def set_resolution(
+        self,
+        largura,
+        altura
+    ):
+
+        self.root.geometry(
+            f"{largura}x{altura}"
+        )
+
+        self.center_window()
+
+
 
     def run(self):
         self.root.mainloop()
