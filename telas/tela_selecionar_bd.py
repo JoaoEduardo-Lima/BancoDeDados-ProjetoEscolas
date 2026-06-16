@@ -24,7 +24,8 @@ class Tela_SelecionarSGBD(Menu):
             master,
             app,
             "Selecionar SGBD",
-            options
+            options,
+            subtitle=f"Banco Atual: {GerenciadorBancoDeDados.current_name}"
         )
 
     def sqlserver(self):
@@ -33,31 +34,36 @@ class Tela_SelecionarSGBD(Menu):
             SqlServerDriver(),
             "SQL Server"
         )
+        self.recarregar()
 
     def mysql(self):
-
+        
         GerenciadorBancoDeDados.set_driver(
             MysqlDriver(),
             "MySQL Server"
         )
+        self.recarregar()
 
     def postgresql(self):
-
+       
         GerenciadorBancoDeDados.set_driver(
             PostgresDriver(),
             "PostGreSQL Server"
         )
-
+        self.recarregar()
 
     def sqlite(self):
-
+               
         GerenciadorBancoDeDados.set_driver(
             SqliteDriver(),
             "SQLite Server"
         )
-
+        self.recarregar()
+        
     def voltar(self):
 
         self.app.go_back()
 
-    
+    def recarregar(self):
+
+        self.app.refresh_screen()
