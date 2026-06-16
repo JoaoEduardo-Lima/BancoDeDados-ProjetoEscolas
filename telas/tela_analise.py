@@ -1,22 +1,22 @@
 from core.menu import Menu
 
 
-class Menu_principal(Menu):
+class Menu_analise(Menu):
 
     def __init__(self, master, app):
 
         options = [
-            ("Terminal", self.terminal),
-            ("Checar dados das tabelas", self.analise),
-            ("Adicionar a tabelas", self.adicionar),
-            ("Remover de tabelas", self.remover),
-            ("Voltar", self.voltar)
+            ("Voltar",self.voltar),
+            ("Analisar a Carrinhos", self.terminal),
+            ("Analisar a Máquinas", self.analise),
+            ("Analisar a revisões ", self.adicionar),
+            ("Analisar a ", self.remover)
         ]
 
         super().__init__(
             master,
             app,
-            "MENU PRINCIPAL",
+            "MENU ANALISE",
             options
         )
 

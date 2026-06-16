@@ -1,16 +1,19 @@
 from core.menu import Menu
-
+from telas.tela_adicionar import *
+from telas.tela_analise import *
+from telas.tela_remover import *
+from core.janela import app
 
 class Menu_principal(Menu):
 
     def __init__(self, master, app):
 
         options = [
+            ("Voltar",self.voltar),
             ("Terminal", self.terminal),
             ("Checar dados das tabelas", self.analise),
             ("Adicionar a tabelas", self.adicionar),
-            ("Remover de tabelas", self.remover),
-            ("Voltar", self.voltar)
+            ("Remover de tabelas", self.remover)
         ]
 
         super().__init__(
@@ -21,16 +24,16 @@ class Menu_principal(Menu):
         )
 
     def terminal(self):
-        print("Abrir terminal")
+        print("terminal")
 
     def analise(self):
-        print("abrir meni de analise")
+        app.show_screen(Menu_analise)
 
     def adicionar(self):
-        print("Abrir  menu de adicionar")
+        app.show_screen(Menu_adicionar)
     
     def remover(self):
-        print("abrir menu de remove")
+        app.show_screen(Menu_remover)
 
     def voltar(self):
         self.app.go_back()

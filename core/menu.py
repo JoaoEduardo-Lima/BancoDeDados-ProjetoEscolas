@@ -12,7 +12,8 @@ class Menu(tk.Frame):
         master,
         app,
         title,
-        options
+        options,
+        subtitle=""
     ):
 
         super().__init__(
@@ -22,6 +23,7 @@ class Menu(tk.Frame):
 
         self.app = app
         self.title = title
+        self.subtitle = subtitle
         self.options = options
         self.selected = 0
 
@@ -44,7 +46,21 @@ class Menu(tk.Frame):
             )
         )
 
-        self.title_label.pack(pady=20)
+        self.title_label.pack(pady=(20.5))
+
+        self.subtitle_label = tk.Label(
+        self,
+        text=self.subtitle,
+        fg="gray",
+        bg=GerenciadorTema.current.WINDOW_BG,
+        font=(
+            GerenciadorTema.current.FONT_FAMILY,
+            12
+            )
+        )
+
+
+        self.subtitle_label.pack(pady=(0, 20))
 
         self.option_labels = []
 

@@ -2,6 +2,8 @@ from core.menu import Menu
 from telas.menu_principal import Menu_principal
 from core.janela import app
 from telas.tela_configuracao import Tela_Configuracao
+from conexaoDB.conexao import GerenciadorBancoDeDados
+
 
 class Tela_inicial(Menu):
 
@@ -16,10 +18,12 @@ class Tela_inicial(Menu):
         super().__init__(
             master, 
             app, 
-            "Sistema Banco de Dados",
-            options
+            f"Sistema Banco de Dados",
+            options,
+            subtitle=f"Banco Atual: {GerenciadorBancoDeDados.current_name}"
+
         )
-    
+
     def iniciar(self):
         app.show_screen(Menu_principal)
 

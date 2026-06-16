@@ -1,22 +1,22 @@
 from core.menu import Menu
 
 
-class Menu_principal(Menu):
+class Menu_adicionar(Menu):
 
     def __init__(self, master, app):
 
         options = [
-            ("Terminal", self.terminal),
-            ("Checar dados das tabelas", self.analise),
-            ("Adicionar a tabelas", self.adicionar),
-            ("Remover de tabelas", self.remover),
-            ("Voltar", self.voltar)
+            ("Voltar",self.voltar),
+            ("Adicionar a Carrinhos", self.terminal),
+            ("Adicionar a Máquinas", self.analise),
+            ("Adicionar a revisões ", self.adicionar),
+            ("Adicionar a ", self.remover)
         ]
 
         super().__init__(
             master,
             app,
-            "MENU PRINCIPAL",
+            "MENU ADICIONAR",
             options
         )
 
@@ -24,7 +24,7 @@ class Menu_principal(Menu):
         print("Abrir terminal")
 
     def analise(self):
-        print("abrir meni de analise")
+        print("abrir menu de analise")
 
     def adicionar(self):
         print("Abrir  menu de adicionar")
@@ -34,3 +34,5 @@ class Menu_principal(Menu):
 
     def voltar(self):
         self.app.go_back()
+
+   

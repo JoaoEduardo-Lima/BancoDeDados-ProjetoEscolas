@@ -6,12 +6,12 @@ class Tela_Resolucao(Menu):
     def __init__(self, master, app):
 
         options = [
+            ("Voltar",self.voltar),
             ("800x600", self.res_800x600),
             ("1024x768", self.res_1024x768),
             ("1280x720", self.res_1280x720),
             ("1366x768", self.res_1366x768),
-            ("1920x1080", self.res_1920x1080),
-            ("Voltar", self.voltar)
+            ("1920x1080", self.res_1920x1080)
         ]
 
         super().__init__(
