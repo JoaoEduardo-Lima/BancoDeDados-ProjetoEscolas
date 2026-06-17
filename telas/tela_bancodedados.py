@@ -1,5 +1,6 @@
 from core.menu import Menu
 from core.janela import app
+from telas.tela_config_bd import *
 
 from telas.tela_selecionar_bd import (Tela_SelecionarSGBD)
 
@@ -30,8 +31,8 @@ class Tela_BancoDados(Menu):
 
     def configurar(self):
 
-        print(
-            "Configurar conexão"
+        self.app.show_screen(
+            Tela_ConfigurarConexao
         )
 
     def testar(self):

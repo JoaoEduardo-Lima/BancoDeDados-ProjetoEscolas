@@ -1,13 +1,40 @@
-class SqlServerDriver:
+import pyodbc
 
-    def connect(self):
+from conexaoDB.drivers.driver_base import DriverBase
 
-        print(
-            "Conectando ao SQL Server..."
+
+class SqlServerDriver(DriverBase):
+
+    def get_connection_fields(self):
+
+        return [
+            "Servidor",
+            "Banco"
+        ]
+
+    def connect(
+        self,
+        dados
+    ):
+
+        servidor = dados["Servidor"]
+        banco = dados["Banco"]
+
+        conexao = pyodbc.connect(
+
+            f"""
+            DRIVER={{SQL Server}};
+            SERVER={servidor};
+            DATABASE={banco};
+            Trusted_Connection=yes;
+            """
         )
 
-    def disconnect(self):
+        return conexao
 
-        print(
-            "Desconectando SQL Server..."
-        )
+    def disconnect(
+        self,
+        conexao
+    ):
+
+        conexao.close()
