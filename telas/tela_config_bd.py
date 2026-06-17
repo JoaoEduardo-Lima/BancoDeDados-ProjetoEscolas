@@ -23,6 +23,14 @@ class Tela_ConfigurarConexao(Menu):
 
         subtitle = ""
 
+        mensagem = app.get_message()
+
+        if mensagem:
+
+            subtitle += (
+                f"{mensagem}\n\n"
+            )
+
         for campo in campos:
 
             valor = (
@@ -132,10 +140,19 @@ class Tela_ConfigurarConexao(Menu):
                 "Falha na conexão"
             )
 
-    def conectar(self):
-
-        GerenciadorBancoDeDados.connect()
 
     def voltar(self):
 
         self.app.go_back()
+
+    def conectar(self):
+
+        sucesso, mensagem = (
+            GerenciadorBancoDeDados.connect()
+        )
+
+        self.app.set_message(
+            mensagem
+        )
+
+        self.app.refresh_screen()

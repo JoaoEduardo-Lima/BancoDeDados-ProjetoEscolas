@@ -20,9 +20,15 @@ class Tela_inicial(Menu):
             app, 
             f"Sistema Banco de Dados",
             options,
-            subtitle=f"Banco Atual: {GerenciadorBancoDeDados.current_name}"
-
+            f"SGBD: "
+            f"{GerenciadorBancoDeDados.current_name}\n"
+            f"Servidor: "
+            f"{GerenciadorBancoDeDados.get_value('Servidor')}\n"
+            f"Banco: "
+            f"{GerenciadorBancoDeDados.get_value('Banco')}"
         )
+
+        
 
     def iniciar(self):
         app.show_screen(Menu_principal)

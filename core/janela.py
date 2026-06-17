@@ -15,6 +15,8 @@ class Janela:
 
         self.current_screen = None
 
+        self.message = ""
+
         # Histórico
         self.history = []
 
@@ -147,6 +149,17 @@ class Janela:
         )
 
         self.center_window()
+
+    def set_message(
+        self,
+        texto
+    ):
+
+        self.message = texto
+
+    def get_message(self):
+
+        return self.message
 
 
     def run(self):

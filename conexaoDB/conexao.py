@@ -66,19 +66,17 @@ class GerenciadorBancoDeDados:
                 )
             )
 
-            print(
-                "Conectado!"
+            return (
+                True,
+                "Conexão estabelecida com sucesso."
             )
-
-            return True
 
         except Exception as erro:
 
-            print(
-                f"Erro: {erro}"
+            return (
+                False,
+                str(erro)
             )
-
-            return False
 
     @classmethod
     def disconnect(cls):
