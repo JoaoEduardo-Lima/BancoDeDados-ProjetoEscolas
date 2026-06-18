@@ -1,6 +1,5 @@
 from core.menu import Menu
 from telas.menu_principal import Menu_principal
-from core.janela import app
 from telas.tela_configuracao import Tela_Configuracao
 from conexaoDB.conexao import GerenciadorBancoDeDados
 
@@ -12,26 +11,53 @@ class Tela_inicial(Menu):
         options = [
             ("Iniciar", self.iniciar),
             ("Configurações", self.configuracao),
-            ("Sair", app.root.quit)
+            ("Sair", self.sair)
         ]
 
-        super().__init__(
-            master, 
-            app, 
-            f"Sistema Banco de Dados",
-            options,
+        if GerenciadorBancoDeDados.is_connected():
+
+            status = "🟢 Conectado"
+
+        else:
+
+            status = "🔴 Desconectado"
+
+        subtitle = (
             f"SGBD: "
             f"{GerenciadorBancoDeDados.current_name}\n"
-            f"Servidor: "
-            f"{GerenciadorBancoDeDados.get_value('Servidor')}\n"
-            f"Banco: "
-            f"{GerenciadorBancoDeDados.get_value('Banco')}"
+            f"Status: {status}"
         )
 
-        
+        for campo, valor in (
+            GerenciadorBancoDeDados
+            .get_config()
+            .items()
+        ):
+
+            subtitle += (
+                f"\n{campo}: {valor}"
+            )
+
+        super().__init__(
+            master,
+            app,
+            "Sistema Banco de Dados",
+            options,
+            subtitle
+        )
 
     def iniciar(self):
-        app.show_screen(Menu_principal)
+
+        self.app.show_screen(
+            Menu_principal
+        )
 
     def configuracao(self):
-        app.show_screen(Tela_Configuracao)
+
+        self.app.show_screen(
+            Tela_Configuracao
+        )
+
+    def sair(self):
+
+        self.app.fechar()

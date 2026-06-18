@@ -6,8 +6,7 @@ class GerenciadorBancoDeDados:
 
     conexao = None
 
-    # Guarda todos os parâmetros da conexão
-    connection_data = {}
+    config = {}
 
     @classmethod
     def set_driver(
@@ -19,8 +18,15 @@ class GerenciadorBancoDeDados:
         cls.current_driver = driver
         cls.current_name = name
 
-        # limpa configurações do banco anterior
-        cls.connection_data = {}
+    @classmethod
+    def get_driver(cls):
+
+        return cls.current_driver
+
+    @classmethod
+    def get_driver_name(cls):
+
+        return cls.current_name
 
     @classmethod
     def set_value(
@@ -29,7 +35,7 @@ class GerenciadorBancoDeDados:
         valor
     ):
 
-        cls.connection_data[campo] = valor
+        cls.config[campo] = valor
 
     @classmethod
     def get_value(
@@ -37,38 +43,45 @@ class GerenciadorBancoDeDados:
         campo
     ):
 
-        return cls.connection_data.get(
+        return cls.config.get(
             campo,
             ""
         )
 
     @classmethod
-    def get_all_values(cls):
+    def get_config(cls):
 
-        return cls.connection_data
+        return cls.config
+
+    @classmethod
+    def set_config(
+        cls,
+        dados
+    ):
+
+        cls.config = dados
 
     @classmethod
     def connect(cls):
 
         if not cls.current_driver:
 
-            print(
+            return (
+                False,
                 "Nenhum banco selecionado."
             )
-
-            return False
 
         try:
 
             cls.conexao = (
                 cls.current_driver.connect(
-                    cls.connection_data
+                    cls.config
                 )
             )
 
             return (
                 True,
-                "Conexão estabelecida com sucesso."
+                "Conexão realizada com sucesso."
             )
 
         except Exception as erro:
@@ -87,6 +100,14 @@ class GerenciadorBancoDeDados:
 
             cls.conexao = None
 
-            print(
-                "Desconectado."
-            )
+    @classmethod
+    def is_connected(cls):
+
+        return (
+            cls.conexao is not None
+        )
+
+    @classmethod
+    def get_connection(cls):
+
+        return cls.conexao

@@ -1,5 +1,9 @@
 import tkinter as tk
-
+from preferencias_de_config.configs_pessoais import Configuracoes
+from UI.gerenciador_tema import GerenciadorTema
+from conexaoDB.conexao import GerenciadorBancoDeDados
+from conexaoDB.drivers_map import DRIVERS
+from conexaoDB.conexao import GerenciadorBancoDeDados
 
 class Janela:
 
@@ -7,11 +11,59 @@ class Janela:
 
         self.root = tk.Tk()
 
+        dados = Configuracoes.carregar()
+
+        tema = dados.get(
+            "tema",
+            "DarkTheme"
+        )
+
+        GerenciadorTema.set_theme_by_name(
+            tema
+        )
+
+        sgbd = dados.get(
+            "sgbd",
+            None
+        )
+
+        if sgbd in DRIVERS:
+
+            GerenciadorBancoDeDados.set_driver(
+
+                DRIVERS[sgbd](),
+
+                sgbd
+        )
+            
+        config_db = dados.get(
+            "config_db",
+            {}
+        )
+
+        GerenciadorBancoDeDados.set_config(
+            config_db
+        )
+
+        largura = dados.get(
+            "largura",
+            800
+        )
+
+        altura = dados.get(
+            "altura",
+            600
+        )
+
+        self.root.geometry(
+            f"{largura}x{altura}"
+        )
+
         self.root.title("Sistema")
 
-        self.root.geometry("800x600")
-
-        self.root.configure(bg="black")
+        self.root.configure(
+            bg="black"
+        )
 
         self.current_screen = None
 
@@ -26,6 +78,10 @@ class Janela:
 
         self.center_window()
 
+        self.root.protocol(
+        "WM_DELETE_WINDOW",
+        self.fechar
+        )
 
     def show_screen(
         self,
@@ -160,6 +216,44 @@ class Janela:
     def get_message(self):
 
         return self.message
+
+
+    def salvar_configuracoes(self):
+
+        dados = {
+
+            "largura":
+                self.root.winfo_width(),
+
+            "altura":
+                self.root.winfo_height(),
+
+            "tema":
+                GerenciadorTema
+                .get_theme_name(),
+
+            "sgbd":
+                GerenciadorBancoDeDados
+                .current_name,
+
+            "config_db":
+                GerenciadorBancoDeDados
+                .get_config()
+        }
+
+        Configuracoes.salvar(
+            dados
+        )
+
+    def fechar(self):
+
+        self.salvar_configuracoes()
+
+        self.root.destroy()
+
+
+
+
 
 
     def run(self):
