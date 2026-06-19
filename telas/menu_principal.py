@@ -3,6 +3,7 @@ from telas.tela_adicionar import *
 from telas.tela_analise import *
 from telas.tela_remover import *
 from core.janela import app
+from telas.tela_terminal import *
 
 class Menu_principal(Menu):
 
@@ -24,7 +25,7 @@ class Menu_principal(Menu):
         )
 
     def terminal(self):
-        print("terminal")
+        app.show_screen(Tela_TerminalSQL)
 
     def analise(self):
         app.show_screen(Menu_analise)

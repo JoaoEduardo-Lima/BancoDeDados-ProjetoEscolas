@@ -103,11 +103,55 @@ class GerenciadorBancoDeDados:
     @classmethod
     def is_connected(cls):
 
-        return (
-            cls.conexao is not None
-        )
+        return cls.conexao is not None
 
     @classmethod
     def get_connection(cls):
 
         return cls.conexao
+
+    @classmethod
+    def execute(
+        cls,
+        sql
+    ):
+
+        if not cls.conexao:
+
+            return (
+                False,
+                "Nenhuma conexão ativa."
+            )
+
+        try:
+
+            cursor = cls.conexao.cursor()
+
+            cursor.execute(sql)
+
+            try:
+
+                resultados = (
+                    cursor.fetchall()
+                )
+
+                return (
+                    True,
+                    resultados
+                )
+
+            except:
+
+                cls.conexao.commit()
+
+                return (
+                    True,
+                    "Comando executado com sucesso."
+                )
+
+        except Exception as erro:
+
+            return (
+                False,
+                str(erro)
+            )

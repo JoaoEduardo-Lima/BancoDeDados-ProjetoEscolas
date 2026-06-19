@@ -1,3 +1,10 @@
 {
-
+    "largura": 800,
+    "altura": 600,
+    "tema": "PastelTheme",
+    "sgbd": "SQL Server",
+    "config_db": {
+        "Servidor": "localhost\\SQLEXPRESS",
+        "Banco": "MaquinasPadilha"
+    }
 }
