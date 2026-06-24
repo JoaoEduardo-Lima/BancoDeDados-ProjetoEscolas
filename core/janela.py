@@ -1,69 +1,40 @@
-import tkinter as tk
-from preferencias_de_config.configs_pessoais import Configuracoes
-from UI.gerenciador_tema import GerenciadorTema
-from conexaoDB.conexao import GerenciadorBancoDeDados
-from conexaoDB.drivers_map import DRIVERS
-from conexaoDB.conexao import GerenciadorBancoDeDados
+import tkinter as tk #fundação do programa, nossass janelas são feitas por ele
+from preferencias_de_config.configs_pessoais import Configuracoes # import das configurações salvas da ultima sessão
+from UI.gerenciador_tema import GerenciadorTema #import dos possíveis temas de cor do aplicativo
+from conexaoDB.conexao import GerenciadorBancoDeDados # import da classe responsavel pelo gerenciamento e conexao com o database
+from conexaoDB.drivers_map import DRIVERS # import das configurações especificas de cada drive
 
-class Janela:
+
+class Janela: #classe responsável por ser a base do nosso programa, nosso app
 
     def __init__(self):
-
         self.root = tk.Tk()
 
         dados = Configuracoes.carregar()
 
-        tema = dados.get(
-            "tema",
-            "DarkTheme"
-        )
+        tema = dados.get("tema", "DarkTheme")
+        GerenciadorTema.set_theme_by_name(tema)
 
-        GerenciadorTema.set_theme_by_name(
-            tema
-        )
-
-        sgbd = dados.get(
-            "sgbd",
-            None
-        )
-
+        sgbd = dados.get("sgbd",None)
         if sgbd in DRIVERS:
-
             GerenciadorBancoDeDados.set_driver(
 
                 DRIVERS[sgbd](),
 
                 sgbd
-        )
+        )   
             
-        config_db = dados.get(
-            "config_db",
-            {}
-        )
-
-        GerenciadorBancoDeDados.set_config(
-            config_db
-        )
-
-        largura = dados.get(
-            "largura",
-            800
-        )
-
-        altura = dados.get(
-            "altura",
-            600
-        )
-
-        self.root.geometry(
-            f"{largura}x{altura}"
-        )
-
+        config_db = dados.get("config_db",{})
+        GerenciadorBancoDeDados.set_config(config_db)
+        
+        largura = dados.get("largura",800)
+        altura = dados.get("altura",600)
+        
+        self.root.geometry(f"{largura}x{altura}")
+        
         self.root.title("Sistema")
 
-        self.root.configure(
-            bg="black"
-        )
+        self.root.configure(bg="black")
 
         self.current_screen = None
 
@@ -72,16 +43,14 @@ class Janela:
         # Histórico
         self.history = []
 
-        # Informações da tela atual
+        # Informações da tela atual 
         self.current_class = None
+
         self.current_kwargs = {}
 
         self.center_window()
 
-        self.root.protocol(
-        "WM_DELETE_WINDOW",
-        self.fechar
-        )
+        self.root.protocol("WM_DELETE_WINDOW",self.fechar)
 
     def show_screen(
         self,
@@ -250,11 +219,6 @@ class Janela:
         self.salvar_configuracoes()
 
         self.root.destroy()
-
-
-
-
-
 
     def run(self):
 

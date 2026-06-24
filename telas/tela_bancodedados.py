@@ -24,7 +24,7 @@ class Tela_BancoDados(Menu):
         )
 
     def selecionar_sgbd(self):
-
+        
         self.app.show_screen(
             Tela_SelecionarSGBD
         )

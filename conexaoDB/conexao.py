@@ -127,26 +127,48 @@ class GerenciadorBancoDeDados:
 
             cursor = cls.conexao.cursor()
 
+            comando = (
+                sql.strip()
+                .split()[0]
+                .upper()
+            )
+
             cursor.execute(sql)
 
-            try:
+            if comando == "SELECT":
 
-                resultados = (
+                colunas = [
+
+                    coluna[0]
+
+                    for coluna in
+                    cursor.description
+                ]
+
+                linhas = (
                     cursor.fetchall()
                 )
 
                 return (
                     True,
-                    resultados
+                    {
+                        "tipo": "SELECT",
+                        "colunas": colunas,
+                        "linhas": linhas
+                    }
                 )
 
-            except:
+            else:
 
                 cls.conexao.commit()
 
                 return (
                     True,
-                    "Comando executado com sucesso."
+                    {
+                        "tipo": "COMANDO",
+                        "linhas_afetadas":
+                        cursor.rowcount
+                    }
                 )
 
         except Exception as erro:

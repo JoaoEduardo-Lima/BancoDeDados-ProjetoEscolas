@@ -1,7 +1,7 @@
 {
-    "largura": 800,
-    "altura": 600,
-    "tema": "PastelTheme",
+    "largura": 1280,
+    "altura": 720,
+    "tema": "DarkTheme",
     "sgbd": "SQL Server",
     "config_db": {
         "Servidor": "localhost\\SQLEXPRESS",
